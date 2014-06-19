@@ -45,3 +45,13 @@ repli list times = concatMap (fill times []) list
    where fill 0 l xs = l
          fill t [] x = fill (t - 1) [x] x
          fill t l x  = fill (t - 1) (x:l) x
+
+-- 16
+dropEvery :: [a] -> Int -> [a]
+dropEvery list x = zipFilter zFilter list (filterList (length list) x)
+   where zipFilter filt (a:as) (b:bs)
+            | filt a b  = a : zipFilter filt as bs
+            | otherwise = zipFilter filt as bs
+         zipFilter _    _      _ = []
+         zFilter x y = y
+         filterList size d = [(x `mod` d /= 0) | x <- [1..size]]
