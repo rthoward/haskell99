@@ -28,5 +28,20 @@ myReverse xs = rev xs []
 isPalindrome :: String -> Bool
 isPalindrome str = str == (reverse str)
 
--- 7
+-- 7 - 13 too tough for now
 
+-- 14
+-- hopefully concatMap isn't cheating, but
+-- I'm getting tired of tail recursion
+dupli :: [a] -> [a]
+dupli l = concatMap double l
+   where double x = [x, x]
+
+-- 15
+-- avoided concatMap on this one, since using
+-- replicate seemed a little too obvious
+repli :: [a] -> Int -> [a]
+repli list times = concatMap (fill times []) list
+   where fill 0 l xs = l
+         fill t [] x = fill (t - 1) [x] x
+         fill t l x  = fill (t - 1) (x:l) x
