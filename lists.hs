@@ -55,3 +55,12 @@ dropEvery list x = zipFilter zFilter list (filterList (length list) x)
          zipFilter _    _      _ = []
          zFilter x y = y
          filterList size d = [(x `mod` d /= 0) | x <- [1..size]]
+
+-- 17
+split :: [a] -> Int -> ([a], [a])
+split l x = (take x l, drop x l)
+
+-- 18
+slice :: [a] -> Int -> Int -> [a]
+slice l x y = drop (x - 1) $ take y l
+
